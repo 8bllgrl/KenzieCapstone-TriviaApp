@@ -2,6 +2,13 @@ plugins {
     id 'java'
 }
 
+jar {
+    manifest {
+        attributes 'Main-Class': 'com.kenzieacademy.eightballgirl.program2.main.Main'
+    }
+}
+
+
 group 'org.example'
 version '1.0-SNAPSHOT'
 
@@ -10,18 +17,18 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.jetbrains:annotations:20.1.0'
-    implementation 'org.jetbrains:annotations:20.1.0'
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.0'
-    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.13.0'
+    implementation 'org.jetbrains:annotations:23.1.0'
+    implementation 'org.jetbrains:annotations:23.1.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.0'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.14.0'
+    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.14.0'
     // Use JUnit test framework.
     testImplementation(platform('org.junit:junit-bom:5.8.0'))
     testImplementation('org.junit.jupiter:junit-jupiter')
     testImplementation 'com.squareup.okhttp3:mockwebserver:4.9.3'
 
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.0'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.14.0'
 }
 
 test {

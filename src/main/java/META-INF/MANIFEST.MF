@@ -1,0 +1,3 @@
+Manifest-Version: 1.0
+Main-Class: com.kenzieacademy.eightballgirl.program2.main.Main
+

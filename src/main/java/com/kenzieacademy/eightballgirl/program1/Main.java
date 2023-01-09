@@ -22,7 +22,9 @@ public class Main {
 
     public static void main(String[] args) {
 
-        new Quiz(10);
+        Thread thread = new Thread(() -> new Quiz(10));
+        thread.start();
+
 
     }
 }

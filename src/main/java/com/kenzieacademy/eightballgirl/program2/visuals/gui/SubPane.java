@@ -1,8 +1,11 @@
 package com.kenzieacademy.eightballgirl.program2.visuals.gui;
 
 import com.kenzieacademy.eightballgirl.program2.logic.constants.AppConstants;
+import com.kenzieacademy.eightballgirl.program2.main.AppThread;
+import com.kenzieacademy.eightballgirl.program2.main.Main;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 public class SubPane implements GuiRenderable {
@@ -19,7 +22,10 @@ public class SubPane implements GuiRenderable {
     //variables
 
     int x = 50, y = 50, width = 50, height = 50;
+    int test = 6;
     ArrayList<String> questionTxt;
+    AppThread subpaneThread;
+    EditableTextbox editableTextbox;
     //editable text box
     //----where does the information get sent to? this subpanel, or to the application?
     //submit button extends guibutton
@@ -34,7 +40,12 @@ public class SubPane implements GuiRenderable {
         this.x = (AppConstants.APPLICATION_WIDTH / 2) - width / 2;
         this.y = (AppConstants.APPLICATION_HEIGHT / 2) - height / 2;
         questionTxt = new ArrayList<>();
-        seperateStringToQuestionTxtList("A fast food chain: \"If it doesn't get all over the place, it doesn't belong in your face\"");
+        seperateStringToQuestionTxtList(Main.currentClueQuestion);
+        startSubpaneThread();
+        int editboxWidth = 380;
+        this.editableTextbox = new EditableTextbox(AppConstants.basic_font,
+                AppConstants.APPLICATION_WIDTH / 2 - editboxWidth / 2, 390, editboxWidth, 50
+        );
     }
 
 
@@ -73,61 +84,64 @@ public class SubPane implements GuiRenderable {
         //replace this with a forloop:
         renderTitle(g2);
         renderQuestion(g2);
+        renderEditableTextBox(g2);
         renderSubmitBox(g2);
+
+    }
+
+    private void renderEditableTextBox(Graphics2D g2) {
+//        g2.setColor(new Color(71, 179, 179));
+//        g2.setStroke(new BasicStroke(2));
+//        int widthRect = 380;
+//        g2.drawRect(AppConstants.APPLICATION_WIDTH / 2 - widthRect / 2, 390, widthRect, 50);
+        editableTextbox.render(g2);
+
+    }
+
+    public void keyTyped(KeyEvent e) {
+        editableTextbox.charTyped(e);
     }
 
     private void renderSubmitBox(Graphics2D g2) {
         g2.setColor(new Color(110, 62, 164));
         int submitWidth = 300;
         int submitHeight = 65;
-        g2.fillRoundRect(AppConstants.APPLICATION_WIDTH/2-submitWidth/2,450,submitWidth,submitHeight,20,20);
+        g2.fillRoundRect(AppConstants.APPLICATION_WIDTH / 2 - submitWidth / 2, 450, submitWidth, submitHeight, 20, 20);
         g2.setColor(Color.white);
-        g2.setFont(new Font("Gill Sans MT", Font.BOLD,45));
-        g2.drawString("SUBMIT",submitWidth/2+25 , 465+submitHeight/2);
+        g2.setFont(new Font("Gill Sans MT", Font.BOLD, 45));
+        g2.drawString("SUBMIT", submitWidth / 2 + 25, 465 + submitHeight / 2);
 
 
     }
 
     private void renderQuestion(Graphics2D g2) {
         g2.setColor(new Color(110, 62, 164));
-        g2.setFont(new Font("Gill Sans MT", Font.PLAIN,25));
-        //separate the string into more than one string, put it in an array, and then loop through it. each time that a new 'i' is reached, add +15 to the y.
-        //how to separate string ?
-
-        //make a copy of the base string.
-        //take the substring 0 - 32.
-        //save this substring to a new temp string.
-        //add this temp string to an arraylist of strings.
-        //remove substring 0-32 from the string copy.
-        //loop again.
-
-        //after this, there is a loop that loops through the arraylist that was created. this is the question string arraylist.
-        //temp Y int is made. 200 at first.
-        //for each string in the arraylist, g2. draw string( questionTxtArraylist.get(i) , 65, y )
-        // when the 'i' becomes 2, add +25 to the temp Y int.
-        //when loop is done, make temp Y = 200 again.
-        //there is a public method that allows you to clear the arraylist so that strings from previous questions do not appear in the next questions.
+        g2.setFont(new Font("Gill Sans MT", Font.PLAIN, 25));
 
         int ySpacing = 150;
-        for (String s : questionTxt){
-            g2.drawString( s, 95,ySpacing);
-            ySpacing = ySpacing+25;
+        for (String s : questionTxt) {
+            g2.drawString(s, 95, ySpacing);
+            ySpacing = ySpacing + 25;
         }
     }
 
-    private void seperateStringToQuestionTxtList(String string){
+    private void seperateStringToQuestionTxtList(String string) {
         String copyOfString = string;
-        System.out.println(copyOfString);
-        int rowLength = 37;
+//        System.out.println(copyOfString);
+        int rowLength = 31;
 
 
-        while (copyOfString!=null){
+        while (copyOfString != null) {
             String substring;
-            substring = copyOfString.substring(0,rowLength);
+            if (copyOfString.length() <= rowLength) {
+                questionTxt.add(copyOfString);
+                return;
+            }
+            substring = copyOfString.substring(0, rowLength);
             questionTxt.add(substring);
             copyOfString = copyOfString.substring(rowLength);
 
-            if (copyOfString.length() <= rowLength){
+            if (copyOfString.length() <= rowLength) {
                 questionTxt.add(copyOfString);
                 return;
             }
@@ -141,25 +155,40 @@ public class SubPane implements GuiRenderable {
 
     private void renderTitle(Graphics2D g2) {
         g2.setColor(new Color(37, 6, 83));
-        g2.setFont(new Font("Haettenschweiler", Font.PLAIN,55));
-        g2.drawString("Question Genre.", width/2 - 55,100);
+        g2.setFont(new Font("Haettenschweiler", Font.PLAIN, 55));
+        g2.drawString(Main.currentClueCategory, 110, 100);
     }
 
     private void drawtemporarybuttons(Graphics2D g2) {
         g2.setColor(new Color(110, 62, 164));
-        g2.fillRoundRect(AppConstants.APPLICATION_WIDTH/2,AppConstants.APPLICATION_WIDTH/2,150,50,20,20);
+        g2.fillRoundRect(AppConstants.APPLICATION_WIDTH / 2, AppConstants.APPLICATION_WIDTH / 2, 150, 50, 20, 20);
         g2.setColor(new Color(71, 179, 179));
-        g2.fillRoundRect(AppConstants.APPLICATION_WIDTH/2,AppConstants.APPLICATION_WIDTH/2-100,150,50,20,20);
+        g2.fillRoundRect(AppConstants.APPLICATION_WIDTH / 2, AppConstants.APPLICATION_WIDTH / 2 - 100, 150, 50, 20, 20);
         g2.setColor(new Color(209, 18, 65));
-        g2.fillRoundRect(AppConstants.APPLICATION_WIDTH/2,AppConstants.APPLICATION_WIDTH/2+100,150,50,20,20);
+        g2.fillRoundRect(AppConstants.APPLICATION_WIDTH / 2, AppConstants.APPLICATION_WIDTH / 2 + 100, 150, 50, 20, 20);
         g2.setColor(new Color(29, 211, 29));
-        g2.fillRoundRect(AppConstants.APPLICATION_WIDTH/2-160,AppConstants.APPLICATION_WIDTH/2+100,150,50,20,20);
+        g2.fillRoundRect(AppConstants.APPLICATION_WIDTH / 2 - 160, AppConstants.APPLICATION_WIDTH / 2 + 100, 150, 50, 20, 20);
         g2.setColor(new Color(253, 194, 83));
-        g2.fillRoundRect(AppConstants.APPLICATION_WIDTH/2-160,AppConstants.APPLICATION_WIDTH/2-100,150,50,20,20);
+        g2.fillRoundRect(AppConstants.APPLICATION_WIDTH / 2 - 160, AppConstants.APPLICATION_WIDTH / 2 - 100, 150, 50, 20, 20);
         g2.setColor(new Color(37, 6, 83));
-        g2.fillRoundRect(AppConstants.APPLICATION_WIDTH/2-160,AppConstants.APPLICATION_WIDTH/2,150,50,20,20);
+        g2.fillRoundRect(AppConstants.APPLICATION_WIDTH / 2 - 160, AppConstants.APPLICATION_WIDTH / 2, 150, 50, 20, 20);
     }
 
+
+    //TODO: this is a test because i might need to use a multi-threaded program in order to make this work properly.
+    public void startSubpaneThread() {
+        subpaneThread = new AppThread() {
+            @Override
+            public void run() {
+                while (test != 6) {
+                    System.out.println("Whoooaa nelly");
+                }
+            }
+        };
+        Thread thread = new Thread(subpaneThread);
+        thread.start();
+
+    }
     //getters & setters
 
 }

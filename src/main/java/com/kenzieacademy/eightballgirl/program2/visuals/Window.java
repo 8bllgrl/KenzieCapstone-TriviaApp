@@ -20,7 +20,7 @@ public class Window {
         frame.setResizable(false);
         frame.pack();
 
-        frame.setTitle("Slideshow App");
+        frame.setTitle("Trivia Game!");
         frame.setBackground(Color.black);
         frame.setLocationRelativeTo(null);
 
