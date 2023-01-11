@@ -1,4 +1,3 @@
 # kenzie-capstone-quiz
 
-
-![kenzie-capstone-quiz](trivia-app-icon.png =250x "Trivia app")
+[<img src="trivia-app-icon.png" width="200"/>](image.png)
