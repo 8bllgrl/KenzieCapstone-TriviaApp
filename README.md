@@ -26,7 +26,7 @@ Yes, free! You also have permission to play around with the code if you like.
 
 This game utilizes HTTP connections so that the large amount of information from the  [JService API](https://jservice.kenzie.academy/) isn’t downloaded to your computer. By connecting to the web address, the program receives a JSON file, which is interpreted with the Jackson library to make this file type useful. The API used in this application is a database for a plethora of trivia questions and the answers to them.
 
-Since it connects to the web in order to work, please make sure you are connected to the internet before playing the game!
+*Since it connects to the web in order to work, please make sure you are connected to the internet before playing the game!*
 
 ### Java Swing
 
