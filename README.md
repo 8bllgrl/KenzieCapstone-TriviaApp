@@ -64,7 +64,7 @@ There are two versions for this program. In summary, version 1 is a complete gam
 
 The GUI version is incomplete and does not allow the user to play the game in full. You'll have to use the console version if you actually want to play the game. However, I was still able to implement the usage of the JService API to display a question and a genre.
 
-### Installation
+## Installation
 
 This java program was made with the amazon Corretto 16 version of java. ZIP downloads will be available soon.
 
