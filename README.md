@@ -8,11 +8,13 @@ There are 355,237 questions, and 40,950 categories in total, and you don’t get
 
 ### Features
 
-- Responds to user input.
-- REST api usage
-- Connects to the web.
-- Reads JSON files with [Jackson](https://github.com/FasterXML/jackson/wiki/FAQ).
-- GUI using Java Swing.
+- [x] Responds to user input.
+- [x] REST api usage
+- [x] Connects to the web.
+- [x] Reads JSON files with [Jackson](https://github.com/FasterXML/jackson/wiki/FAQ).
+- [x] GUI using Java Swing.
+
+ 
 
 ## What is it?
 
@@ -39,21 +41,26 @@ There are two versions for this program. In summary, version 1 is a complete gam
 
 ### Version 1
 
----
-- [ ]  Runs in the console.
-- [ ]  Fully functioning game logic.
-- [ ]  Answer 10 questions, you will be granted a total score at the end of the game.
-- [ ]  Somewhat lenient with spelling errors. “SKATEBOARD” counts for answer “a skateboard”
+<p align="center">
+    <img src="console-pic.png" width="900" alt="console-pic.png">
+</p>
+
+- [x]  Runs in the console.
+- [x]  Fully functioning game logic.
+- [x]  Answer 10 questions, you will be granted a total score at the end of the game.
+- [x]  Somewhat lenient with spelling errors. “SKATEBOARD” counts for answer “a skateboard”
 - [ ]  No GUI.
 
 ### Version 2
 
----
+<p align="center">
+    <img src="gui-pic.png" width="500" alt="gui-pic.png">
+</p>
 
 - [ ]  Does not contain game logic.
 - [ ]  Incomplete.
-- [ ]  Uses Java Swing for the GUI.
-- [ ]  Contains an editable text box that listens for the user’s keyboard input.
+- [x]  Uses Java Swing for the GUI.
+- [x]  Contains an editable text box that listens for the user’s keyboard input.
 
 The GUI version is incomplete and does not allow the user to play the game in full. You'll have to use the console version if you actually want to play the game. However, I was still able to implement the usage of the JService API to display a question and a genre.
 
